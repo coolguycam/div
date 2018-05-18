@@ -2,14 +2,24 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import Nav from "../../components/Nav";
-import GphApiClient from "giphy-js-sdk-core";
-const client = GphApiClient("dc6zaTOxFJmzC");
+// import Nav from "../../components/Nav";
+// import GphApiClient from "giphy-js-sdk-core";
+// const client = GphApiClient("dc6zaTOxFJmzC");
+// client
+//     .search("gifs", { q: "cats" })
+//     .then(res => {
+//       res.data.forEach(gifObject => {
+//         console.log(gifObject);
+//       });
+//     })
+//     .catch(err => console.log(err))
 
 class Media extends Component {
-  // Initialize this.state.books as an empty array
+  // Initialize this.state.gifs as an empty array
   state = {
     gifs: [],
+    source: "",
+    alt: ""
   };
 
   // Add code here to get all books from the database and save them to this.state.books
@@ -19,24 +29,18 @@ class Media extends Component {
 
   loadGifs = () => {
     API.getGifs()
-      .then(res =>
-        this.setState({ gifs: res.data })
-      )
+      .then(res => this.setState({ gifs: res.data, source: "", alt: "" }))
       .catch(err => console.log(err));
   };
 
-  handleSubmit = event => {
-
-  }
-  // addBook = event => {
+  // handleSubmit = event => {
   //   event.preventDefault();
-  //   if (this.state.title && this.state.author) {
-  //     API.saveBook({
-  //       title: this.state.title,
-  //       author: this.state.author,
-  //       synopsis: this.state.synopsis
+  //   if (this.state.source && this.state.alt) {
+  //     API.saveGif({
+  //       source: this.state.source,
+  //       alt: this.state.alt
   //     })
-  //       .then(res => this.loadBooks())
+  //       .then(res => this.loadGifs())
   //       .catch(err => console.log(err));
   //   }
   // };
@@ -49,8 +53,8 @@ class Media extends Component {
   // };
 
   // handleDelete = id => {
-  //   API.deleteBook(id)
-  //   .then(res => this.loadBooks())
+  //   API.deleteGif(id)
+  //   .then(res => this.loadGifs())
   //   .catch(err => console.log(err));
   // }
 
@@ -58,23 +62,19 @@ class Media extends Component {
     return (
       <Container fluid>
         <Row>
-          {/* <Col size="sm-12">
-            {this.state.books.length ? (
+          <Col size="sm-12">
+            {this.state.gifs.length ? (
               <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </a>
+                {this.state.gifs.map(book => (
+                  <ListItem key={gif._id}>
+                    <img src={gif.source} alt={gif.alt} />
                   </ListItem>
                 ))}
               </List>
             ) : (
               <h3>No Results to Display</h3>
             )}
-          </Col> */}
+          </Col>
         </Row>
       </Container>
     );
