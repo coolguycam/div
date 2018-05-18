@@ -1,64 +1,64 @@
 import React, { Component } from "react";
-import Jumbotron from "../../components/Jumbotron";
-import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import Nav from "../../components/Nav";
+import GphApiClient from "giphy-js-sdk-core";
+const client = GphApiClient("dc6zaTOxFJmzC");
 
 class Media extends Component {
   // Initialize this.state.books as an empty array
   state = {
-    books: [],
-    title: "",
-    author: "",
-    synopsis: ""
+    gifs: [],
   };
 
   // Add code here to get all books from the database and save them to this.state.books
   componentDidMount() {
-    this.loadBooks();
+    this.loadGifs();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  loadGifs = () => {
+    API.getGifs()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ gifs: res.data })
       )
       .catch(err => console.log(err));
   };
 
-  addBook = event => {
-    event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadBooks())
-        .catch(err => console.log(err));
-    }
-  };
+  handleSubmit = event => {
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  };
-
-  handleDelete = id => {
-    API.deleteBook(id)
-    .then(res => this.loadBooks())
-    .catch(err => console.log(err));
   }
+  // addBook = event => {
+  //   event.preventDefault();
+  //   if (this.state.title && this.state.author) {
+  //     API.saveBook({
+  //       title: this.state.title,
+  //       author: this.state.author,
+  //       synopsis: this.state.synopsis
+  //     })
+  //       .then(res => this.loadBooks())
+  //       .catch(err => console.log(err));
+  //   }
+  // };
+
+  // handleInputChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // };
+
+  // handleDelete = id => {
+  //   API.deleteBook(id)
+  //   .then(res => this.loadBooks())
+  //   .catch(err => console.log(err));
+  // }
 
   render() {
     return (
       <Container fluid>
         <Row>
-          <Col size="sm-12">
+          {/* <Col size="sm-12">
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
@@ -68,15 +68,13 @@ class Media extends Component {
                         {book.title} by {book.author}
                       </strong>
                     </a>
-                    <DeleteBtn 
-                      onClick={() => this.handleDelete(book._id)}/>
                   </ListItem>
                 ))}
               </List>
             ) : (
               <h3>No Results to Display</h3>
             )}
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     );
