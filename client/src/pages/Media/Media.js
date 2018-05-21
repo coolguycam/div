@@ -2,17 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-// import Nav from "../../components/Nav";
-// import GphApiClient from "giphy-js-sdk-core";
-// const client = GphApiClient("dc6zaTOxFJmzC");
-// client
-//     .search("gifs", { q: "cats" })
-//     .then(res => {
-//       res.data.forEach(gifObject => {
-//         console.log(gifObject);
-//       });
-//     })
-//     .catch(err => console.log(err))
+
 
 class Media extends Component {
   // Initialize this.state.gifs as an empty array
@@ -45,12 +35,7 @@ class Media extends Component {
   //   }
   // };
 
-  // handleInputChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
+  
 
   // handleDelete = id => {
   //   API.deleteGif(id)
@@ -66,8 +51,8 @@ class Media extends Component {
             {this.state.gifs.length ? (
               <List>
                 {this.state.gifs.map(book => (
-                  <ListItem key={gif._id}>
-                    <img src={gif.source} alt={gif.alt} />
+                  <ListItem key={book._id}>
+                    <img src={book.source} alt={book.alt} />
                   </ListItem>
                 ))}
               </List>
